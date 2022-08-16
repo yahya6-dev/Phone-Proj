@@ -1,17 +1,14 @@
 from scrapy import Spider,Field,Item
 import os
-from MySQLdb import connect
+from psycopg2 import connect
 from scrapy.exceptions import CloseSpider
 import re
 from scrapy.shell import inspect_response
 from scrapy.settings import Settings
 from datetime import datetime
 class MyPipeline:
-	def __init__(self,db,user,passwd,host):
-		self.db = db
-		self.user = user
-		self.passwd = passwd
-		self.host = host
+	def __init__(self,conn):
+		self.connection_string = conn
 
 	def process_item(self,item,crawler):
 		TIME_STAMP = datetime.utcnow()
@@ -27,14 +24,11 @@ class MyPipeline:
 
 	@classmethod
 	def from_crawler(cls,crawler):
-		return cls(os.getenv("DB"),
-			os.getenv("USER"),
-			os.getenv("PASSWD"),
-			os.getenv("HOST"))
+		return cls(os.getenv("DATABASE_URL"))
 
 	def open_spider(self,crawler):
 		try:
-			self.conn =  connect(user=self.user,passwd=self.passwd,db=self.db,host=self.host)
+			self.conn =  connect(self.connection_string)
 		except:
 			raise CloseSpider("Cant open the database")
 		else:
@@ -64,7 +58,7 @@ class PhonePrices(Spider):
 			return text,price.group(0)
 
 	def parse(self,response):
-		output = {"output":[]} 
+		output = {"output":[]}
 		for item in response.xpath("//ul/li/text()"):
 			text,price = self.parse_item(item.get())
 			my_item = MyItem()

@@ -7,7 +7,7 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 class Config:
 	SQLALCHEMY_TRACK_MODIFICATIONS = True   #base for all configurations
 	SECRET_KEY = uuid.uuid4().hex
-
+	SSL_REDIRECT = False
 	@classmethod
 	def init_app(cls,app):			#special need to initialize app
 		pass
@@ -34,7 +34,12 @@ class Production(Config):
 		handler.setLevel(logging.ERROR)
 		app.logger.addHandler(handler)
 
+class Heroku(Production):
+	SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+	SSL_REDIRECT = True
+
 config = {
+		"heroku":Heroku,
 		"testing":Testing,
 		"development":Development,
 		"production":Production

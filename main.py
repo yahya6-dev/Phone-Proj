@@ -33,3 +33,9 @@ def test(coverage):										 #command line COVERAGE
 @app.shell_context_processor
 def make_context():
 	return {"Price":Prices,"db":db}
+
+@app.cli.command()
+def deploy():
+	import os
+	db.create_all()
+	os.system("scrapy runspider phonePrice.py")

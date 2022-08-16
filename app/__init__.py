@@ -19,7 +19,6 @@ def run_schedule(s_time=60*60*2):
 	return Timer(s_time,run).start()
 
 def create_app(config_name):
-	os.system("scrapy runspider ../phonePrices.py")
 	app = Flask(__name__)               #create application factory
 	app.config.from_object(config[config_name])
 	config[config_name].init_app(app)
