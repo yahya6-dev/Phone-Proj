@@ -30,13 +30,16 @@ class Production(Config):
 	@classmethod
 	def init_app(cls,app):
 		from logging import StreamHandler
+		from werkzeug.middleware.proxy_fix import ProxyFix
 		handler = StreamHandler()
 		handler.setLevel(logging.ERROR)
 		app.logger.addHandler(handler)
+		app.wsgi_app = ProxyFix(app.wsgi_app)
 
 class Heroku(Production):
 	SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 	SSL_REDIRECT = True
+
 
 config = {
 		"heroku":Heroku,
