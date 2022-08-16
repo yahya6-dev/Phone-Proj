@@ -1,7 +1,7 @@
 flask
 scrapy
 flask_sqlalchemy
-flask_bootstrap
+bootstrap-flask
 flask_moment
 flask_migrate
 psycopg2
