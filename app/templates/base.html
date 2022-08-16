@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>	
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		{%block heads%}
+
+		{%endblock%}
+		{{bootstrap.load_css()}}
+		<style>
+			.bg{
+				background-color:rgb(35,40,35);
+			}
+			.custom{
+				font-weight:bold;
+				background-color:rgba(0,200,0,0.6);
+				color:white;
+				box-shadow: -10px -10px rgba(0,180,0,0.2);
+			}
+
+		</style>
+
+	</head>
+
+	<body class="bg">
+		<nav class="navbar fixed-top bg  text-white" style="border-bottom:2px solid white">
+			<div class="container-fluid justify-content-stretch" style="border-bottom: 2px solid white">
+
+				<a href="#" alt="phone_img" class="navbar-brand fw-bold text-white fs-4">PHONE PRICES </a>
+				<a href="#" alt="phone_img" class="navbar-brand"><img src="{{url_for('static',filename='iphone0.png')}}" width="100">
+				<a href="#" alt="phone_img" class="navbar-brand"><img src="{{url_for('static',filename='index0.png')}}" width="100">
+				<a href="#" alt="phone_img" class="navbar-brand"><img src="{{url_for('static',filename='sam.png')}}" width="100">
+
+			</div>
+			
+			<div class="container justify-content-stretch">
+				<h1 class=" m-2 navbar-brand text-white">Phone Prices. This Page Update Itself On  New Prices</h1>
+			</div>
+		</nav>
+		<hr class="m-1"></hr>
+		<br><br><br>
+		{%block contents%}
+			
+
+		{%endblock%}
+		{%block scripts%}
+			{{moment.include_moment()}}
+			{{bootstrap.load_js()}}
+
+		{%endblock%}
+
+	</body>
+
+
+
+
+</html>
+
+

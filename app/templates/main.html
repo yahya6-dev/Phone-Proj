@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+
+{%block contents%}
+	<br><br><br><br><br><br>
+	<h1 class="text-center text-white m-2">List Of Phone Prices.</h1>
+	<div class="table-responsive">
+		<table class="table table-borderless mx-auto m-2 table-striped " style="width:85%">
+			<thead>
+				<tr class="custom sticky-top">
+					<th>Name</th><th>Price</th>
+				</tr>	
+
+			</thead>
+			<tbody style="border: 1px solid white">
+				 {%for phone in phones%}
+					<tr class="bg text-white">
+                                        	<td>{{phone.phone}}</td>
+						<td>{{phone.price}}</td>
+					</tr>
+                                {%endfor%}
+
+
+			</tbody>			
+		</table>
+	</div>
+	<h3 class="text-center m-2 btn-outline-secondary text-white">Last Updated {{moment(last_update).format("LLL")}}</h3>
+
+	<hr class="m-1"></hr>
+	
+	<footer>
+			<h3 class="fw-bold text-white text-center">PhonePrice&copy; 2022</h3>
+	</footer>
+
+{%endblock%}
+
+
