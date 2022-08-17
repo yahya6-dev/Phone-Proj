@@ -24,8 +24,8 @@ def create_app(config_name):
 	config[config_name].init_app(app)
 	from .main import main
 	app.register_blueprint(main)
-	#if not app.testing:
-	#	run_schedule()
+	if not app.testing:
+		run_schedule()
 	if app.config["SSL_REDIRECT"]:
 		from flask_sslify import SSLify
 		sslify = SSLify(app)
