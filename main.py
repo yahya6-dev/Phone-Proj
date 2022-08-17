@@ -38,4 +38,4 @@ def make_context():
 def deploy():
 	import os
 	db.create_all()
-	os.system("scrapy runspider phonePrice.py")
+	#os.system("scrapy runspider phonePrice.py")
