@@ -17,7 +17,7 @@ class Testing(Config):
 	TESTING = True
 
 class Development(Config):
-	SQLALCHEMY_DATABASE_URI = "sqlite://"+os.path.join(base_dir, os.getenv("DEV_DATABASE") or "dev_database.sqlite" ) #configuration for development
+	SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DATABASE")  #configuration for development
 
 class Production(Config):
 	USER = os.getenv("DB_USER")    #database credentials
@@ -25,7 +25,7 @@ class Production(Config):
 	HOST = os.getenv("DB_HOST")
 	DB   = os.getenv("DB_NAME")
 	PRODUCTION = True
-	SQLALCHEMY_DATABASE_URI =  f"mysql://{USER}:{PASS}@{HOST}/{DB}"
+	SQLALCHEMY_DATABASE_URI =  os.getenv("DATABASE_URL").replace("postgres","postgresql")
 
 	@classmethod
 	def init_app(cls,app):

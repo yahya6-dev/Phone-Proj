@@ -9,7 +9,7 @@ def is_mobile(user_agent):
 
 @main.route("/")
 def index():
-	items = Prices.query.order_by(Prices.phone).all()
+	items = Prices.query.all()
 	if is_mobile(request.headers.get("User-Agent")):
 		return render_template("main1.html",last_update=items[0].time_stamp,phones=items)
 	else:

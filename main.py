@@ -37,5 +37,5 @@ def make_context():
 @app.cli.command()
 def deploy():
 	import os
-	db.create_all()
-	#os.system("scrapy runspider phonePrice.py")
+	#db.create_all()
+	os.system("scrapy runspider phonePrice.py")
