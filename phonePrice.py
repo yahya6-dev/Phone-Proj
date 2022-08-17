@@ -6,6 +6,7 @@ import re
 from scrapy.shell import inspect_response
 from scrapy.settings import Settings
 from datetime import datetime
+
 class MyPipeline:
 	def __init__(self,conn):
 		self.connection_string = conn
@@ -24,7 +25,7 @@ class MyPipeline:
 
 	@classmethod
 	def from_crawler(cls,crawler):
-		return cls(os.getenv("DATABASE_URL"))
+		return cls(os.getenv("DATABASE_URL").replace("postgres","postgresql"))
 
 	def open_spider(self,crawler):
 		try:

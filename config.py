@@ -37,7 +37,7 @@ class Production(Config):
 		app.wsgi_app = ProxyFix(app.wsgi_app)
 
 class Heroku(Production):
-	SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+	SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL").replace("postgres","postgresql")
 	SSL_REDIRECT = True
 
 
