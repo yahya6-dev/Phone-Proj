@@ -27,13 +27,11 @@ def create_app(config_name):
 	if app.config["SSL_REDIRECT"]:
 		from flask_sslify import SSLify
 		sslify = SSLify(app)
-		run_schedule(s_time=60*60)
+		run_schedule(s_time=60)
 
 	boostrap.init_app(app)
 	db.init_app(app)
 	moment.init_app(app)
-	if not app.testing:
-		run_schedule()
 	return app
 
 
