@@ -10,13 +10,6 @@ db = SQLAlchemy() #set up db instance and
 moment = Moment() #moment for proper time rendering
 boostrap = Bootstrap5(None)
 
-def run_schedule(s_time=60*60*2):
-	def run():
-		db.drop_all()
-		db.create_all()
-		os.system("scrapy runspider ../phonePrices.py")
-		run_shedule()
-	return Timer(s_time,run).start()
 
 def create_app(config_name):
 	app = Flask(__name__)               #create application factory
@@ -27,7 +20,6 @@ def create_app(config_name):
 	if app.config["SSL_REDIRECT"]:
 		from flask_sslify import SSLify
 		sslify = SSLify(app)
-		run_schedule(s_time=60)
 
 	boostrap.init_app(app)
 	db.init_app(app)

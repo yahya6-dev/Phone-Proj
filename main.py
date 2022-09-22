@@ -5,7 +5,7 @@ import click
 import coverage
 import sys
 from app.models import Prices
-
+import multiprocessing,os
 
 COV = None
 if os.getenv("COVERAGE"):					#checking for COVERAGE setting and configures it properly 
@@ -13,6 +13,7 @@ if os.getenv("COVERAGE"):					#checking for COVERAGE setting and configures it p
 
 app = create_app( os.getenv("APP_CONFIG") or "development" )
 migrate = Migrate(app,db)
+multiprocessing.Process(target=os.system,args=("python3  utils.py",)).start()
 
 @app.cli.command()
 @click.option("--coverage/--no-coverage",default=False,help="run test under test coverage")     #run test configure test coverage
